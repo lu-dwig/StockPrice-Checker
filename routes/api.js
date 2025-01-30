@@ -5,11 +5,11 @@ const fetch = require ("node-fetch");
 
 
 async function createStock(stock, like, ip) {
-  const stockModel = new StockModel({ 
+  const newStock = new StockModel({ 
     symbol: stock, 
     likes: like ? [ip] : [], 
   });
-  const savedNew = await stockModel.save();
+  const savedNew = await newStock.save();
   return savedNew;
 }
 

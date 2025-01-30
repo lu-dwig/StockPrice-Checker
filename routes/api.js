@@ -3,6 +3,11 @@ const StockModel = require("../models").StockModel;
 const fetch = require ("node-fetch");
 
 
+
+async function findStock(stock) {
+  return await StockModel.findOne({ symbol: stock }).exec();
+}
+
 async function saveStock(stock, like, ip) {
   let saved = {};
   const foundStock = await findStock(stock);

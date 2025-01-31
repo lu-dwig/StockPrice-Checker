@@ -1,7 +1,7 @@
 'use strict';
-const StockModel = require("../models").StockModel;
+const StockModel = require("../models").Stock;
 const fetch = require ("node-fetch");
-
+// import('node-fetch');
 
 
 async function createStock(stock, like, ip) {
@@ -48,13 +48,23 @@ module.exports = function (app) {
   app.route('/api/stock-prices').get(async function (req, res){
       const { stock, like } = req.query;
       const { symbol, latestPrice } = await getStock(stock);
+      // if (!stocks || stocks.length === 0) {
+      //   return res.status(400).json({ error: 'No stocks provided' });
+      // }
       if (!symbol){
         res.jsons({ stockData: { likes: like ? 1 :0 } });
         return;
       }
-      // if (!stocks || stocks.length === 0) {
-      //   return res.status(400).json({ error: 'No stocks provided' });
-      // }
-    });
-    
+      
+      const oneStockData = await saveStock(symbol, like, req.ip);
+      console.log("One Stock Data", oneStockData);
+      
+      res.json({ 
+        stockData: { 
+          stock: symbol, 
+          price: latestPrice, 
+          likes: oneStockData.likes.length 
+        } 
+      });
+    });    
 };

@@ -89,6 +89,12 @@ module.exports = function (app) {
           stockData.push({
             rel_likes: secondstock.likes.length - firststock.likes.length,
           });
+        } else {
+          stockData.push({
+            stock: symbol2,
+            price: latestPrice2,
+            rel_likes: secondstock.likes.length - firststock.likes.length,
+          });
         }
       }
       const { symbol, latestPrice } = await getStock(stock);

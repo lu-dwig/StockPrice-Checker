@@ -96,6 +96,11 @@ module.exports = function (app) {
             rel_likes: secondstock.likes.length - firststock.likes.length,
           });
         }
+  
+        res.json({
+          stockData,
+        });
+        return;
       }
       const { symbol, latestPrice } = await getStock(stock);
       // if (!stocks || stocks.length === 0) {

@@ -57,6 +57,12 @@ module.exports = function (app) {
       const { stock, like } = req.query;
       if (Array.isArray(stock)){
         console.log("stock", stock);
+
+        const { symbol, latestPrice } = await getStock(stock[0]);
+        const { symbol: symbol2, latestPrice: latestPrice2 } = await getStock(
+          stock[1]
+        );
+        
       }
       const { symbol, latestPrice } = await getStock(stock);
       // if (!stocks || stocks.length === 0) {

@@ -71,6 +71,13 @@ module.exports = function (app) {
         const secondstock = await saveStock(
           stock[1], like, req.ip
         );
+        
+        let stockData = [];
+        if (!symbol) {
+          stockData.push({
+            rel_likes: firststock.likes.length - secondstock.likes.length,
+          });
+        } 
 
       }
       const { symbol, latestPrice } = await getStock(stock);

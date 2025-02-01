@@ -55,22 +55,14 @@ module.exports = function (app) {
 
   app.route('/api/stock-prices').get(async function (req, res){
       const { stock, like } = req.query;
-      if (Array.isArray(stock)){
-        console.log("stock", stock);
+      if (Array.isArray(stock)) {
+        console.log("stocks", stock);
 
-        const { symbol, latestPrice } = await getStock(
-          stock[0]
-        );
-        const { symbol: symbol2, latestPrice: latestPrice2 } = await getStock(
-          stock[1]
-        );
+        const { symbol, latestPrice } = await getStock(stock[0]);
+        const { symbol: symbol2, latestPrice: latestPrice2 } = await getStock(stock[1]);
 
-        const firststock = await saveStock(
-          stock[0], like, req.ip
-        );
-        const secondstock = await saveStock(
-          stock[1], like, req.ip
-        );
+        const firststock = await saveStock(stock[0], like, req.ip);
+        const secondstock = await saveStock(stock[1], like, req.ip);
         
         let stockData = [];
         if (!symbol) {

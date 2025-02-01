@@ -29,8 +29,8 @@ async function saveStock(stock, like, ip) {
   let saved = {};
   const foundStock = await findStock(stock);
   if (!foundStock) {
-    const createSaved = await createStock(stock, like, ip); 
-    saved = createSaved;
+    const createsaved = await createStock(stock, like, ip); 
+    saved = createsaved;
     return saved;
   } else {
     if (like && foundStock.likes.indexOf(ip) === -1) {

@@ -58,11 +58,20 @@ module.exports = function (app) {
       if (Array.isArray(stock)){
         console.log("stock", stock);
 
-        const { symbol, latestPrice } = await getStock(stock[0]);
+        const { symbol, latestPrice } = await getStock(
+          stock[0]
+        );
         const { symbol: symbol2, latestPrice: latestPrice2 } = await getStock(
           stock[1]
         );
-        
+
+        const firststock = await saveStock(
+          stock[0], like, req.ip
+        );
+        const secondstock = await saveStock(
+          stock[1], like, req.ip
+        );
+
       }
       const { symbol, latestPrice } = await getStock(stock);
       // if (!stocks || stocks.length === 0) {

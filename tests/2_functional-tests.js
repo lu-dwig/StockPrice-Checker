@@ -20,5 +20,19 @@ suite('Functional Tests', function() {
               done();
             });
         });
+        test("Viewing one stock and liking it: GET request to /api/stock-prices/", function (done) {
+            chai
+              .request(server)
+              .get("/api/stock-prices/")
+              .set("content-type", "application/json")
+              .query({ stock: "GOLD", like: true })
+              .end(function (err, res) {
+                assert.equal(res.status, 200);
+                assert.equal(res.body.stockData.stock, "GOLD");
+                assert.equal(res.body.stockData.likes, 1);
+                assert.exists(res.body.stockData.price, "GOLD has a price");
+                done();
+              });
+          });
     });
 });

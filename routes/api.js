@@ -78,7 +78,13 @@ module.exports = function (app) {
             rel_likes: firststock.likes.length - secondstock.likes.length,
           });
         } 
-
+        else {
+          stockData.push({
+            stock: symbol,
+            price: latestPrice,
+            rel_likes: firststock.likes.length - secondstock.likes.length,
+          });
+        }
       }
       const { symbol, latestPrice } = await getStock(stock);
       // if (!stocks || stocks.length === 0) {

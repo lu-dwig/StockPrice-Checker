@@ -13,16 +13,24 @@ async function createStock(stock, like, ip) {
   return savedNew;
 }
 
+console.log(StockModel);
+
+// async function findStock(stock) {
+//  return await StockModel.find(query).limit(1).next(function(err, doc){
+//   symbol: stock }).exec();
+// }
 async function findStock(stock) {
-  return await StockModel.findOne({ symbol: stock }).exec();
+  return await StockModel.findOne(
+    { symbol: stock }
+  ).exec();
 }
 
 async function saveStock(stock, like, ip) {
   let saved = {};
   const foundStock = await findStock(stock);
   if (!foundStock) {
-    const createStock = await createStock(stock, like, ip); 
-    saved = createStock;
+    const createSaved = await createStock(stock, like, ip); 
+    saved = createSaved;
     return saved;
   } else {
     if (like && foundStock.likes.indexOf(ip) === -1) {
@@ -52,7 +60,7 @@ module.exports = function (app) {
       //   return res.status(400).json({ error: 'No stocks provided' });
       // }
       if (!symbol){
-        res.jsons({ stockData: { likes: like ? 1 :0 } });
+        res.json({ stockData: { likes: like ? 1 :0 } });
         return;
       }
       

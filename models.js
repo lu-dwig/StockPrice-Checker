@@ -5,6 +5,6 @@ const stockSchema = new Schema({
     symbol: { type : String, required: true},
     likes: { type : [String], default: [] },
 });
-const Stock = mongoose.model('Stock', stockSchema);
+const Stock = mongoose.model("Stock", stockSchema);
 
-module.exports = Stock;
+exports.Stock = Stock;

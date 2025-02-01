@@ -55,6 +55,9 @@ module.exports = function (app) {
 
   app.route('/api/stock-prices').get(async function (req, res){
       const { stock, like } = req.query;
+      if (Array.isArray(stock)){
+        console.log("stock", stock);
+      }
       const { symbol, latestPrice } = await getStock(stock);
       // if (!stocks || stocks.length === 0) {
       //   return res.status(400).json({ error: 'No stocks provided' });

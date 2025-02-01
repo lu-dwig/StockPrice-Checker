@@ -63,5 +63,22 @@ suite('Functional Tests', function() {
                 done();
             });
         });
+        test("Viewing two stocks and liking them: GET request to /api/stock-prices/", function (done) {
+            chai
+              .request(server)
+              .get("/api/stock-prices/")
+              .set("content-type", "application/json")
+              .query({ stock: ["AMZN", "T"], like: true })
+              .end(function (err, res) {
+                assert.equal(res.status, 200);
+                assert.equal(res.body.stockData[0].stock, "AMZN");
+                assert.equal(res.body.stockData[1].stock, "T");
+                assert.exists(res.body.stockData[0].price, "AMZN has a price");
+                assert.exists(res.body.stockData[1].price, "T has a price");
+                assert.exists(res.body.stockData[0].rel_likes, "has rel_likes");
+                assert.exists(res.body.stockData[1].rel_likes, "has rel_likes");
+                done();
+            });
+        });
     });
 });

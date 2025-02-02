@@ -77,6 +77,7 @@ module.exports = function (app) {
             rel_likes: firststock.likes.length - secondstock.likes.length,
           });
         }
+        
         if (!symbol2) {
           stockData.push({
             rel_likes: secondstock.likes.length - firststock.likes.length,

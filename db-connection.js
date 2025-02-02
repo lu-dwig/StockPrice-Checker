@@ -4,4 +4,5 @@ const db =mongoose.connect(process.env.DB, {
   useUnifiedTopology: true,
 });
 
+require('dotenv').config({ path: '.env' });
 module.exports = db;
